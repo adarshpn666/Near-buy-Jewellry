@@ -1,0 +1,70 @@
+export default  users = [
+    {
+        userId : '1',
+        name : 'Alexender',
+        email : 'alex@gmail.com',
+        phone : '984532378',
+        age : 34,
+        gender : 'male',
+        password : 'qwertyuiop',
+        profileImage : '',
+        cart : [{
+            id : '1',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            Image : require('../assets/cartItems/item2.jpg'),
+            productCode : 'NEPRNGTRCKY014',
+        },{
+            id : '2',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            productCode : 'NEPRNGTRCKY014',
+            Image : require('../assets/cartItems/item2.jpg'),
+        },{
+            id : '3',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            productCode : 'NEPRNGTRCKY014',
+            Image : require('../assets/cartItems/item2.jpg'),
+        },
+    ],
+        favorite : [{
+            id : '1',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            productCode : 'NEPRNGTRCKY014',
+        },{
+            id : '2',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            productCode : 'NEPRNGTRCKY014',
+        },{
+            id : '3',
+            name : 'Precia Gemstone Necklace NEPRNGTRCKY014',
+            price: 392443,
+            productCode : 'NEPRNGTRCKY014',
+        },
+    ],
+        purchaseHistory :[],
+        address : [{
+            id:'1',
+            addressLine : '15653 Camino Del Cerro',
+            district : 'Los Gatos',
+            state : 'California',
+            country : 'United States',
+            pincode : '95032',
+            isSelected : true,
+        },
+        {
+            id:'2',
+            addressLine : '15653 Camino Del Cerro',
+            district : 'Los Gatos',
+            state : 'California',
+            country : 'United States',
+            pincode : '95032',
+            isSelected : true,
+        }],
+        paymentDetail :[],
+    }
+    
+]

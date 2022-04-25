@@ -1,0 +1,15 @@
+const product = {
+    id : '1',
+    name : '',
+    productCode :'',
+    price : 12334.00,
+    description : '',
+    category : '',
+    Image : '',
+    gender : '',
+    goldPurity : '',
+    grossWeight : '3.4 grams',
+    netWeight : '4.5 grams',
+    certificationDetails : ['',''],
+    avaliability : true,
+}
