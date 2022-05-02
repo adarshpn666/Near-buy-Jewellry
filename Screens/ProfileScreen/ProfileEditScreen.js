@@ -3,10 +3,10 @@ import {
   StyleSheet,
   View,
   Keyboard,
-  KeyboardAwareScrollView,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
-import Header from "../../Components/Header";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UButton from "../../Components/HomeComponents/UButton";
 import EditContainer from "../../Components/ProfileComponents/EditContainer";
 import Color from "../../Constants/Color";
@@ -31,15 +31,21 @@ const ProfileEditScreen = (props) => {
         Keyboard.dismiss();
       }}
     >
-      <View style={styles.container}>
-        <EditContainer onChangeText={editUsernameHandler} value={username}  caretHidden={true}/>
-        <EditContainer onChangeText={editEmailHandler} value={email}  caretHidden={true}/>
+    <View style={styles.container}>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator = {false}>
+      <View  style={styles.container}>
+      <Image source = {require ('../../assets/paymentImage/success.png')} style = {{width : 100, height : 100, margin: 20}} />
+        <EditContainer onChangeText={editUsernameHandler} value={username} selectionColor={'black'} />
+        <EditContainer onChangeText={editEmailHandler} value={email}  selectionColor={'black'}/>
         <EditContainer
-        caretHidden={true}
+          selectionColor={'black'}
           onChangeText={editPhoneNumberHandler}
           value={phoneNumber}
         />
-        <UButton title="SAVE" />
+        <UButton title="SAVE"  style = {styles.button}/>
+        </View>
+    </KeyboardAwareScrollView>
+
       </View>
     </TouchableWithoutFeedback>
   );
@@ -53,4 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: Color.backgroundPrimary,
     alignItems: "center",
   },
+  button : {
+    height : 50,
+    width : 200,
+    borderRadius  :20,
+    backgroundColor : '#3457D5',
+  }
 });

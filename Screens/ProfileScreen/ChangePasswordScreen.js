@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Keyboard,
-  KeyboardAwareScrollView,
   TouchableWithoutFeedback,
 } from "react-native";
 import Header from "../../Components/Header";
@@ -32,7 +31,8 @@ const ChangePasswordScreen = (props) => {
       <View style={styles.container}>
         <EditContainer placeholder="Old Password" onChangeText={editUsernameHandler} value={oldPassword} secureTextEntry={true}  />
         <EditContainer placeholder="New Password" onChangeText={editEmailHandler} value={newPassword}  secureTextEntry={true} />
-        <UButton title="SAVE" />
+        <EditContainer placeholder="Confirm Password" onChangeText={editEmailHandler} value={newPassword}  secureTextEntry={true} />
+        <UButton style = {styles.button} title="SAVE" />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -45,5 +45,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Color.backgroundPrimary,
     alignItems: "center",
+  },
+  button : {
+    height : 50,
+    width : 200,
+    borderRadius  :20,
+    backgroundColor : '#3457D5',
   },
 });

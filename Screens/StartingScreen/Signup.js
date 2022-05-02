@@ -7,6 +7,12 @@ import {
   Keyboard,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { auth } from "../../firebase/firebase-config";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 import { Picker } from "@react-native-picker/picker";
 
@@ -18,33 +24,62 @@ import Button1 from "../../Components/StartingComponents/Button1";
 
 const Signup = (props) => {
   const [selectedGender, setSelectedGender] = useState();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [password, setPassword] = useState("");
   const [age, setAge] = useState(null);
+
+  const signupHandler = () => {
+    createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: name,
+          phoneNumber: mobileNumber
+        })
+          .then(() => {
+            // Profile updated!
+            console.log(mobileNumber);
+            console.log(user);
+            // props.navigation.navigate("Login", {
+            //   name: auth.currentUser.displayName,
+            // });
+            // ...
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
+        // ...
+      })
+      .catch((error) => {
+        console.log(error.message);
+        // ..
+      });
+  };
 
   const userNameInputHandler = (name) => {
     setName(name);
-  }
+  };
 
   const userEmailInputHandler = (email) => {
     setEmail(email);
-  }
+  };
   const userMobileNumberInputHandler = (number) => {
     setMobileNumber(number);
-  }
+  };
   const userPasswordInputHandler = (password) => {
     setPassword(password);
-  }
+  };
   const userAgeInputHandler = (age) => {
     setAge(age);
-  }  
-
-
-  const signUpHandler = () => {
-    console.log(name,email,password,mobileNumber,age,selectedGender);
-  }
+  };
 
   return (
     <KeyboardAwareScrollView>
@@ -59,13 +94,17 @@ const Signup = (props) => {
               <Text style={styles.header}>Welcome New User !</Text>
             </View>
             <View style={styles.inputContainer}>
-              <Input placeholder="Name" style={styles.input}   
-              onChangeText={userNameInputHandler}
-              value={name}
+              <Input
+                placeholder="Name"
+                style={styles.input}
+                onChangeText={userNameInputHandler}
+                value={name}
               />
-              <Input placeholder="Email" style={styles.input} 
-              onChangeText={userEmailInputHandler}
-              value={email}
+              <Input
+                placeholder="Email"
+                style={styles.input}
+                onChangeText={userEmailInputHandler}
+                value={email}
               />
               <Input
                 placeholder="Mobile Number"
@@ -76,9 +115,11 @@ const Signup = (props) => {
                 onChangeText={userMobileNumberInputHandler}
                 value={mobileNumber}
               />
-              <Input placeholder="Password" secureTextEntry={true} 
-              onChangeText={userPasswordInputHandler}
-              value={password}
+              <Input
+                placeholder="Password"
+                secureTextEntry={true}
+                onChangeText={userPasswordInputHandler}
+                value={password}
               />
               <View style={styles.smallInput}>
                 <Input
@@ -106,8 +147,17 @@ const Signup = (props) => {
                 </Picker>
               </View>
             </View>
-            <Button1 title="Sign Up >>" styleButton={styles.button} onPress = {signUpHandler} />
-            <Text style={{ ...styles.text, color: Color.newUserColor }} onPress = {() => {props.navigation.navigate('Login')}}>
+            <Button1
+              title="Sign Up >>"
+              styleButton={styles.button}
+              onPress={signupHandler}
+            />
+            <Text
+              style={{ ...styles.text, color: Color.newUserColor }}
+              onPress={() => {
+                props.navigation.navigate("Login");
+              }}
+            >
               Already user?
             </Text>
           </UserLinearGradient>

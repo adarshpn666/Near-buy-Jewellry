@@ -20,7 +20,11 @@ import Item from "../../Components/StoreComponents/Item";
 const store = data[0];
 const width = Dimensions.get("window").width;
 
-const renderHeader = () => {
+const renderHeader = (navigation) => {
+const customizationHandler = () => {
+  navigation.navigate('CustomizationScreen');
+}
+
     return (
         <View>
     <ImageBackground
@@ -53,7 +57,7 @@ const renderHeader = () => {
     >
       <View>
         <Text style = {{color : Color.primaryText, fontSize : FontSize.descSize, width : 250, marginLeft : 10,}}>For Customize Jewellery Please contact us.</Text>
-        <UButton title="Customization"  style = {{ backgroundColor : Color.GoldContainerColor}} />
+        <UButton title="Customization"  style = {{ backgroundColor : Color.GoldContainerColor}} onPress = {customizationHandler} />
       </View>
       <Text
         style={{
@@ -84,7 +88,8 @@ const StoreScreen = (props) => {
         numColumns = {2}
         renderItem = {({item}) => <Item item = {item} key = {item.id} navigation = {props.navigation}/>}
         showsVerticalScrollIndicator = {false}
-        ListHeaderComponent = {() => renderHeader()}
+        ListHeaderComponent = {() => renderHeader(props.navigation)}
+        contentContainerStyle = {{ alignItems :'center'}}
         style = {styles.listView}
         />
     </View>

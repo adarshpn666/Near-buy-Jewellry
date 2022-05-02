@@ -1,11 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Keyboard } from "react-native";
 
-import Navigation from "./navigation/Navigation";
-import HomeScreen from "./Screens/UserScreen/HomeScreen";
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
 
-import PaymentScreen from './Screens/PaymentScreen/PaymentScreen'
-import TestScreen from "./Screens/Test/TestScreen";
+import Navigation from "./navigation/Navigation";
+import favoriteReducer from "./store/reducers/favorites";
+import customReducer from "./store/reducers/customize";
+
+
+const rootReducer = combineReducers({
+  favorite: favoriteReducer,
+  custom : customReducer,
+});
+
+const store = createStore(rootReducer);
 
 
 
@@ -13,13 +22,11 @@ import TestScreen from "./Screens/Test/TestScreen";
 
 export default function App() {
   return (
+    <Provider store = {store}>
     <View style = {styles.container}>
-      {/* <PaymentScreen/> */}
       <Navigation/>
-      {/* <TestScreen/> */}
     </View>
-  
-
+    </Provider>
   );
 }
 

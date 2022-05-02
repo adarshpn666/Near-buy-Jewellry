@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UButton from "../../Components/HomeComponents/UButton";
-import AddressContainer from "../../Components/ProfileComponents/AddressContainer";
 import Color from "../../Constants/Color";
 
 const AddAddressScreen = (props) => {
@@ -22,7 +21,6 @@ const AddAddressScreen = (props) => {
     >
       <View style={styles.container}>
 
-        <AddressContainer/>
         <UButton title="ADD" />
       </View>
     </TouchableWithoutFeedback>

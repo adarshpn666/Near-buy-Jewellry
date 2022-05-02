@@ -9,6 +9,9 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
+import {  signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../../firebase/firebase-config'
+
 
 import FontSize from "../../Constants/FontSize";
 import Color from "../../Constants/Color";
@@ -16,17 +19,13 @@ import UserLinearGradient from "../../Components/UserLinearGradient";
 import Input from "../../Components/Input";
 import Button1 from "../../Components/StartingComponents/Button1"; 
 
-const userData = {
-  username : 'Alex',
-  password : 'qwertyuiop'
-}
 
 const Login = ({ navigation }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const userInputHandler = (value) => {
-    setUsername(value);
+    setEmail(value);
   };
 
   const userPasswordHandler = (value) => {
@@ -35,26 +34,23 @@ const Login = ({ navigation }) => {
 
   const resetInputHandler = () => {
     setPassword('');
-    setUsername('');
+    setEmail('');
   }
 
   const loginHandler = () => {
-    if(username === userData.username){
-      if(password === userData.password){
-        navigation.navigate("HomeScreen");
-        setPassword('');
-        setUsername('');
-        Keyboard.dismiss();
-      }else{
-        Alert.alert("Wrong Password", "", [
-          { title: "Okay", style: "destructive", onPress: resetInputHandler },
-        ]);
-      }
-    }else{
-      Alert.alert("Invalid UserName", "enter correct User name", [
-        { title: "Okay", style: "destructive", onPress: resetInputHandler },
-      ]);
-    }
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    navigation.navigate('HomeScreen', {name : auth.currentUser.displayName});
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage)
+  });
   }
 
   return (
@@ -73,7 +69,7 @@ const Login = ({ navigation }) => {
               placeholder="Email"
               style={styles.input}
               onChangeText={userInputHandler}
-              value={username}
+              value={email}
             />
             <Input
               placeholder="Password"

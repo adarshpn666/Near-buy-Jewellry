@@ -15,8 +15,8 @@ const SliderItem = ({item}) => {
           source={item.source}
           imageStyle={{ borderRadius: 30 }}
           style={{
-            height: height * 0.25,
-            width: width * 0.95,
+            height: 200,
+            width: 350,
           }}
         >
           <View
@@ -24,13 +24,14 @@ const SliderItem = ({item}) => {
               flex: 1,
               backgroundColor: Color.SliderColor,
               borderRadius: 30,
-              padding: 30,
+              paddingVertical: 30,
+              paddingHorizontal  :10,
             }}
           >
-            <Text style={{ flex: 1, ...styles.text, fontWeight: "bold" }}>
+            <Text style={{ marginBottom : 5,...styles.text, fontWeight: "bold" }} numberOfLines = {3}>
               {item.title}
             </Text>
-            <Text style={{ ...styles.text, fontSize: 20, flex: 0.6 }}>
+            <Text style={{ ...styles.text, fontSize: 20}}>
               {item.description}
             </Text>
             <Text style={{ ...styles.text, fontSize: 16 }}>{item.footer}</Text>

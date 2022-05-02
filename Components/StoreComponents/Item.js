@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -8,14 +8,30 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
 
 import Color from "../../Constants/Color";
+import { toggleFavorite } from "../../store/actions/favorites";
+
 
 const { width, height } = Dimensions.get("window");
 
 const Item = (props) => {
-  const [isFavorite, setIsFavorite] = useState(false);
   const product = props.item;
+
+  const dispatch = useDispatch();
+
+  const ProductId = product.id;
+  const currentMealFavorite = useSelector(state => state.favorite.favoritesProducts.some(item => item.id === ProductId))
+
+  const toggleFavoriteHandler = useCallback(() =>{
+    dispatch(toggleFavorite(ProductId));
+  },[dispatch,ProductId]);
+
+  // useEffect(() => {
+  //   props.navigation.setParams({toggleFav : toggleFavoriteHandler});
+  // },[toggleFavoriteHandler])
+ 
 
   // useEffect(() => {}, [isFavorite]);
 
@@ -80,9 +96,8 @@ const Item = (props) => {
         <Ionicons
           name="heart-sharp"
           size={20}
-          color="white"
-          onPress={() => {
-          }}
+          color={currentMealFavorite?"red" : "white"}
+          onPress={toggleFavoriteHandler}
         />
       </View>
       </View>

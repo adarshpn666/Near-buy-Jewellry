@@ -5,23 +5,17 @@ import {
   Text,
   Image,
   Dimensions,
-  ImageBackground,
+ 
   FlatList,
   ScrollView,
-  SafeAreaView,
-  TouchableWithoutFeedback,
+
+  TouchableHighlight,
 } from "react-native";
 import RecentPurchaseView from "../../Components/HomeComponents/RecentPurchaseView";
-import FooterNav from "../../Components/HomeComponents/FooterNav";
 import SliderItem from "../../Components/HomeComponents/SliderItem";
 import GoldRate from "../../Components/HomeComponents/GoldRate";
 import Color from "../../Constants/Color";
-import FontSize from "../../Constants/FontSize";
-import Item from "../../Components/StoreComponents/Item";
-
 import data from "../../database/TempProductData";
-import ItemViewContainer from "../../Components/StoreComponents/ItemViewContainer";
-import UButton from "../../Components/HomeComponents/UButton";
 
 const userName = "Alex";
 const { width, height } = Dimensions.get("window");
@@ -64,8 +58,8 @@ const HomeScreen = (props) => {
   };
 
   const navigateStoreList = () => {
-    props.navigation.navigate('StoreList');
-  }
+    props.navigation.navigate("StoreList");
+  };
 
   const Footer = () => {
     return (
@@ -93,9 +87,8 @@ const HomeScreen = (props) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.greeting}>
-            Hello, <Text style={styles.name}>{userName}👋</Text>
+            Hello, <Text style={styles.name}>{props.navigation.getParams('name')}👋</Text>
           </Text>
-          <Image source={require("../../assets/Images/Frame.png")} />
         </View>
 
         <FlatList
@@ -112,52 +105,38 @@ const HomeScreen = (props) => {
         <View style={{ alignItems: "center" }}>
           <GoldRate
             style={{
-              height: height * 0.15,
+              height: 150,
               width: width * 0.9,
             }}
           />
           <RecentPurchaseView
-            style={{ height: height * 0.28, width: width * 0.9 }}
+            style={{ height: 300, width: width * 0.9 }}
             data={data}
             navigation={props.navigation}
           />
         </View>
-        <View style={{ alignItems: "center", marginTop: 50 }}>
-          <Text
-            style={{
-              fontSize: FontSize.homeSubHeader,
-              color: Color.recentHome,
-            }}
-          >
-            ITEMS AROUND YOU
-          </Text>
-          <View style={{ flex: 1 }}>
-            <ItemViewContainer data={data} num={4} />
-          </View>
-        </View>
-        <UButton title="Explore More" onPress = {navigateStoreList}/>
       </ScrollView>
-      <FooterNav
-        style={{ height: height * 0.08, width }}
-        navigation={props.navigation}
-      />
+
     </View>
   );
 };
 
 export default HomeScreen;
 
+HomeScreen.navigationOptions = {
+  headerTitle : 'Header',
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
     backgroundColor: Color.backgroundPrimary,
+    padding : 10,
   },
 
   header: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+
+    alignItems: "flex-start",
   },
 
   greeting: {

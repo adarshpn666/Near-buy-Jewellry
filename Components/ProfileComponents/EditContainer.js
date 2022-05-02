@@ -7,7 +7,7 @@ import FontSize from '../../Constants/FontSize';
 
  const EditContainer  = (props) => {
   return (
-   <View>
+   <View style = {props.style}>
          <TextInput
           placeholderTextColor='#808e9b'
           style = {{...styles.input}}
@@ -33,5 +33,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         color : Color.inputColor,
         marginVertical : 20,
+        borderWidth : 1,
+        borderRightWidth : 0,
+        borderLeftWidth : 0,
+        borderTopWidth : 0,
     }
 })

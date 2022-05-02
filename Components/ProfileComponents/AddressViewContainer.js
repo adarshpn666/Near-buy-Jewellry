@@ -7,8 +7,12 @@ const width = Dimensions.get('window').width;
 
 
 const AddressItem = (props) => {
-  const editAddressHandler = () => {
-    props.navigation.navigate('AddressEditScreen');
+
+  const editAddressHandler = (data) => {
+    props.navigation.navigate('AddressEditScreen',{
+        address : data,
+        buttonTitle : 'SAVE',
+    });
   }
 
 
@@ -20,7 +24,7 @@ const AddressItem = (props) => {
           {props.address.state}, {props.address.country}, 
           Pincode : {props.address.pincode}
         </Text>
-        <UButton title = 'edit' onPress = {editAddressHandler}/>
+        <UButton title = 'edit' onPress = {() => editAddressHandler(props.address)}/>
       </View>
     );
   };

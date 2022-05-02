@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 import Color from "../../Constants/Color";
-import Navigation from "../../navigation/Navigation";
 
 const Item = (props) => {
   return (
@@ -31,12 +30,6 @@ const ProfileScreen = (props) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View>
-          <Image
-            source={require("../../assets/Images/Frame.png")}
-            style={{ width: 150, height: 150, marginVertical: 20 }}
-          />
-        </View>
         <Item navigation={props.navigation} name="RecentPurchaseScreen">
           Purchase History
         </Item>
@@ -75,6 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Color.backgroundPrimary,
     alignItems: "center",
+    marginTop: 30,
     justifyContent: "space-around",
   },
   options: {

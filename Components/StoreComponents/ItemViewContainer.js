@@ -8,7 +8,7 @@ const ItemViewContainer = (props) => {
   
     <ScrollView  showsVerticalScrollIndicator = {false}>
       <View style ={styles.container}>
-      {props.num?props.data.slice(0,props.num).map((item) => <Item key = {item.id} item = {item}/>) : props.data.map((item) => <Item key = {item.id} item = {item}/>)
+      {props.data.map((item) => <Item key = {item.id} item = {item} navigation = {props.navigation}/>)
       }
       </View>
     </ScrollView>

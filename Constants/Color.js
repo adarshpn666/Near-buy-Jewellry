@@ -14,6 +14,7 @@ export default {
     cartColor : 'rgba(255,255,255,0.45)',
     productdescription : '#888888',
     productheader: '#444444',
+    selectionColor : 'rgba(180,255,159,0.2)',
 
 
 }
