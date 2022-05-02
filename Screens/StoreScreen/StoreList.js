@@ -4,7 +4,7 @@ import Header from "../../Components/Header";
 
 import Store from "../../Components/Store/Store";
 
-import data from '../../database/TempShopData';
+import data from '../../data/TempShopData';
 
 const StoreList = (props) => {
   return (

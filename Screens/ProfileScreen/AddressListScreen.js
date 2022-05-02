@@ -11,7 +11,7 @@ import AddressViewContainer from "../../Components/ProfileComponents/AddressView
 import Color from "../../Constants/Color";
 import AddAddressScreen from "./AddAddressScreen";
 
-import data from "../../database/TempUserData";
+import data from "../../data/TempUserData";
 const address = data[0].address;
 
 const AddressListScreen = (props) => {

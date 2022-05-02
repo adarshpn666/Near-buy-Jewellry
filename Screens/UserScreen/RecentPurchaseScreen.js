@@ -5,7 +5,7 @@ import RecentPurchaseItem from '../../Components/HomeComponents/RecentPurchaseIt
 import RecentPurchaseView from '../../Components/HomeComponents/RecentPurchaseView'
 import Color from '../../Constants/Color';
 
-import data from '../../database/TempProductData';
+import data from '../../data/TempProductData';
 
 
 

@@ -36,11 +36,11 @@ const Navigation = () => {
           },
         }}
       >
-        <Stack.Screen
+        {/* <Stack.Screen
           name="StartingPage"
           component={StartingPage}
           options={{ headerShown: false }}
-        />
+        /> */}
         <Stack.Screen
           name="Login"
           component={Login}

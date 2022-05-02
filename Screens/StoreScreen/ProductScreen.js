@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Header from "../../Components/Header";
 
-import data from "../../database/TempShopData";
+import data from "../../data/TempShopData";
 
 import { Ionicons } from "@expo/vector-icons";
 import UButton from "../../Components/HomeComponents/UButton";

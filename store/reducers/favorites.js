@@ -1,4 +1,4 @@
-import PRODUCTS from '../../database/TempProductData'
+import PRODUCTS from '../../data/TempProductData'
 import { TOGGLE_FAVORITE } from '../actions/favorites';
 const initialState = {
     products : PRODUCTS,

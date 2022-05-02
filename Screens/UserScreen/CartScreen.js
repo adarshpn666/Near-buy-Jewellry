@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 
-import data from "../../database/TempUserData";
+import data from "../../data/TempUserData";
 import CartItem from "../../Components/CartComponents/CartItem";
 import AddressView from "../../Components/CartComponents/AddressView";
 import PurityOption from "../../Components/CartComponents/PurityOption";

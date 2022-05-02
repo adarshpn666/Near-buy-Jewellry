@@ -14,7 +14,7 @@ import UButton from "../../Components/HomeComponents/UButton";
 import FontSize from "../../Constants/FontSize";
 import Color from "../../Constants/Color";
 
-import data from "../../database/TempShopData";
+import data from "../../data/TempShopData";
 import Item from "../../Components/StoreComponents/Item";
 
 const store = data[0];

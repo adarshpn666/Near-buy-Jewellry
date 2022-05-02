@@ -7,11 +7,13 @@ import {Provider} from 'react-redux';
 import Navigation from "./navigation/Navigation";
 import favoriteReducer from "./store/reducers/favorites";
 import customReducer from "./store/reducers/customize";
+import loggedUserReducer from "./store/reducers/auth";
 
 
 const rootReducer = combineReducers({
   favorite: favoriteReducer,
   custom : customReducer,
+  logged : loggedUserReducer
 });
 
 const store = createStore(rootReducer);

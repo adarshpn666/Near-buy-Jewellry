@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useCallback} from "react";
 import {
   StyleSheet,
   View,
@@ -12,6 +12,11 @@ import {
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from '../../firebase/firebase-config'
 
+import { useDispatch, useSelector } from "react-redux";
+import { loggedUser } from "../../store/actions/auth";
+
+
+
 
 import FontSize from "../../Constants/FontSize";
 import Color from "../../Constants/Color";
@@ -20,9 +25,11 @@ import Input from "../../Components/Input";
 import Button1 from "../../Components/StartingComponents/Button1"; 
 
 
-const Login = ({ navigation }) => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState('');
+  const dispatch = useDispatch();
 
   const userInputHandler = (value) => {
     setEmail(value);
@@ -41,9 +48,11 @@ const Login = ({ navigation }) => {
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    navigation.navigate('HomeScreen', {name : auth.currentUser.displayName});
+    const curruser = userCredential.user;
+    console.log(curruser);
+    setUser(curruser.displayName);
+    props.navigation.navigate('HomeScreen',{screen : 'Home', params : {name : 'Adars'}})
+   
     // ...
   })
   .catch((error) => {
@@ -51,6 +60,8 @@ const Login = ({ navigation }) => {
     const errorMessage = error.message;
     console.log(errorMessage)
   });
+ 
+   
   }
 
   return (

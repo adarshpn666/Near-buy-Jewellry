@@ -47,10 +47,7 @@ const Signup = (props) => {
             // Profile updated!
             console.log(mobileNumber);
             console.log(user);
-            // props.navigation.navigate("Login", {
-            //   name: auth.currentUser.displayName,
-            // });
-            // ...
+            props.navigation.navigate("Login");
           })
           .catch((error) => {
             // An error occurred
