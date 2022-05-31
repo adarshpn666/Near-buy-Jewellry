@@ -31,5 +31,7 @@ firebase : npm install firebase --save
 
 redux : npm install --save redux react-redux 
 
+AsyncStorage : 
 
+secure-store :  expo install expo-secure-store
 

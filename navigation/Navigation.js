@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
 
-import StartingPage from "../Screens/StartingScreen/StartingPage";
+
 import Login from "../Screens/StartingScreen/Login";
 import Signup from "../Screens/StartingScreen/Signup";
 import CartScreen from "../Screens/UserScreen/CartScreen";
@@ -23,71 +22,126 @@ import DrawerNavigation from "./DrawerNavigation";
 import CustomizationScreen from "../Screens/CustomizationScreen/CustomizationScreen";
 import CustomizationSuccessScreen from "../Screens/CustomizationScreen/CustomizationSuccessScreen";
 import FavoriteScreen from "../Screens/UserScreen/FavoriteScreen";
+import LoadingScreen from "../Screens/UserScreen/LoadingScreen";
 
-const Stack = createNativeStackNavigator();
+const AuthNavigatorStack = createNativeStackNavigator();
 
-const Navigation = () => {
+export const AuthNavigation = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      >
-        {/* <Stack.Screen
-          name="StartingPage"
-          component={StartingPage}
-          options={{ headerShown: false }}
-        /> */}
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={DrawerNavigation}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen name="CartScreen" component={CartScreen}  options={{ title: 'Cart' }} />
-        <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} options={{ title: 'Favorite' }}/>
-
-        <Stack.Screen name="RecentPurchaseScreen" component={RecentPurchaseScreen} options={{ title: 'Recent Purchase' }}/>
-        <Stack.Screen name="ProductScreen" component={ProductScreen} options={{ title: 'Product Details' }}/>
-        
-        <Stack.Screen name="StoreList" component={StoreList} options={{ title: 'Shops' }}/>
-        <Stack.Screen name="StoreScreen" component={StoreScreen} options={{ title: 'Shops' }}/>
-        
-        <Stack.Screen name="CustomizationScreen" component={CustomizationScreen} options={{ title: 'Customize Jewellery' }}/>
-        <Stack.Screen name="CustomizationSuccessScreen" component={CustomizationSuccessScreen} options={{ headerShown: false }}/>
-        
-
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{ title: 'Account Settings' }} />
-        <Stack.Screen name="ProfileEditScreen" component={ProfileEditScreen} options={{ title: 'Profile Edit' }} />
-        <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} options={{ title: 'Change password' }}/>
-        <Stack.Screen name="AddressListScreen" component={AddressListScreen} options={{ title: 'Address' }}/>
-        <Stack.Screen name="AddressEditScreen" component={AddressEditScreen} options={{ title: 'Edit Address' }}/>
-        <Stack.Screen name="AddAddressScreen" component={AddAddressScreen} options={{ title: 'Add Address' }}/>
-        <Stack.Screen name="PaymentScreen" component={PaymentScreen} options={{ title: 'Payment' }} />
-        <Stack.Screen
-          name="PaymentSuccessScreen"
-          component={PaymentSuccessScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthNavigatorStack.Navigator
+      screenOptions={{
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerShown: false,
+      }}
+    >
+      <AuthNavigatorStack.Screen name="Login" component={Login} />
+      <AuthNavigatorStack.Screen name="Signup" component={Signup} />
+      <AuthNavigatorStack.Screen
+        name="Loading Screen"
+        component={LoadingScreen}
+      />
+    </AuthNavigatorStack.Navigator>
   );
 };
 
-export default Navigation;
+const HomeNavigatorStack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({});
+export const HomeNavigation = () => {
+  return (
+  <HomeNavigatorStack.Navigator>
+    <HomeNavigatorStack.Screen
+      name="HomeScreen"
+      component={DrawerNavigation}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeNavigatorStack.Screen
+      name="CartScreen"
+      component={CartScreen}
+      options={{ title: "Cart" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="FavoriteScreen"
+      component={FavoriteScreen}
+      options={{ title: "Favorite" }}
+    />
+
+    <HomeNavigatorStack.Screen
+      name="RecentPurchaseScreen"
+      component={RecentPurchaseScreen}
+      options={{ title: "Recent Purchase" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="ProductScreen"
+      component={ProductScreen}
+      options={{ title: "Product Details" }}
+    />
+
+    <HomeNavigatorStack.Screen
+      name="StoreList"
+      component={StoreList}
+      options={{ title: "Shops" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="StoreScreen"
+      component={StoreScreen}
+      options={{ title: "Shops" }}
+    />
+
+    <HomeNavigatorStack.Screen
+      name="CustomizationScreen"
+      component={CustomizationScreen}
+      options={{ title: "Customize Jewellery" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="CustomizationSuccessScreen"
+      component={CustomizationSuccessScreen}
+      options={{ headerShown: false }}
+    />
+
+    <HomeNavigatorStack.Screen
+      name="ProfileScreen"
+      component={ProfileScreen}
+      options={{ title: "Account Settings" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="ProfileEditScreen"
+      component={ProfileEditScreen}
+      options={{ title: "Profile Edit" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="ChangePasswordScreen"
+      component={ChangePasswordScreen}
+      options={{ title: "Change password" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="AddressListScreen"
+      component={AddressListScreen}
+      options={{ title: "Address" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="AddressEditScreen"
+      component={AddressEditScreen}
+      options={{ title: "Edit Address" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="AddAddressScreen"
+      component={AddAddressScreen}
+      options={{ title: "Add Address" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="PaymentScreen"
+      component={PaymentScreen}
+      options={{ title: "Payment" }}
+    />
+    <HomeNavigatorStack.Screen
+      name="PaymentSuccessScreen"
+      component={PaymentSuccessScreen}
+      options={{ headerShown: false }}
+    />
+  </HomeNavigatorStack.Navigator>
+   );
+};

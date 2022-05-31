@@ -18,14 +18,15 @@ const { width, height } = Dimensions.get("window");
 
 const Item = (props) => {
   const product = props.item;
+  const curruser = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
 
   const ProductId = product.id;
-  const currentMealFavorite = useSelector(state => state.favorite.favoritesProducts.some(item => item.id === ProductId))
-
+  // const currentFavorite = useSelector(state => state.favorite.favoritesProducts.some(item => item?.id === ProductId))
+    const currentFavorite = false;
   const toggleFavoriteHandler = useCallback(() =>{
-    dispatch(toggleFavorite(ProductId));
+    dispatch(toggleFavorite(curruser.uid,ProductId, product));
   },[dispatch,ProductId]);
 
   // useEffect(() => {
@@ -36,7 +37,9 @@ const Item = (props) => {
   // useEffect(() => {}, [isFavorite]);
 
   const  navigateProductScreen = () =>{
-    props.navigation.navigate('ProductScreen');
+    props.navigation.navigate('ProductScreen',{
+      product : product
+    });
   }
 
   return (
@@ -45,7 +48,7 @@ const Item = (props) => {
     
       <View>
       <ImageBackground
-        source={product.Image}
+        source={{uri:product.image}}
         imageStyle={{ borderRadius: 100 }}
         style={{
           marginTop: 5,
@@ -96,7 +99,7 @@ const Item = (props) => {
         <Ionicons
           name="heart-sharp"
           size={20}
-          color={currentMealFavorite?"red" : "white"}
+          color={currentFavorite?"red" : "white"}
           onPress={toggleFavoriteHandler}
         />
       </View>

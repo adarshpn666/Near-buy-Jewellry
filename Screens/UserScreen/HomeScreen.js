@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -16,8 +16,10 @@ import Color from "../../Constants/Color";
 import data from "../../data/TempProductData";
 
 import { useSelector } from "react-redux";
+import { fetchUser } from "../../firebase/fetchDetails";
 
-const userName = "Alex";
+
+
 const { width, height } = Dimensions.get("window");
 
 const slides = [
@@ -46,7 +48,12 @@ const slides = [
 
 const HomeScreen = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const curruser = useSelector((state) => state.logged.user);
+  const [userDetails, setUserDetails] = useState(null);
+  const curruser = useSelector((state) => state.auth.user);
+  fetchUser(curruser.uid, setUserDetails);
+
+
+
 
   const updateCurrentIndex = (e) => {
     const contentOffSetX = e.nativeEvent.contentOffset.x;
@@ -89,12 +96,9 @@ const HomeScreen = (props) => {
         <View style={styles.header}>
     
           <Text style={styles.greeting}>
-            Hello, <Text style={styles.name}>{props.route.params.name}👋</Text>
+            Hello, <Text style={styles.name} onPress = {() => {console.log(userDetails)}}>{userDetails?.name}👋</Text>
           </Text>
         </View>
-        <TouchableHighlight onPress={() => console.log(props)}>
-           <Text>ALL</Text> 
-          </TouchableHighlight>
 
         <FlatList
           // ref={ref}

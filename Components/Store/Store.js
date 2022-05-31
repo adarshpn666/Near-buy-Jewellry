@@ -6,7 +6,7 @@ import {
   Text,
   Dimensions,
   Image,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,15 +17,18 @@ import UButton from "../HomeComponents/UButton";
 const width = Dimensions.get("window").width;
 
 const Store = (props) => {
+  const store = props.data;
 
   const navigateStoreScreenHandler = () => {
-    props.navigation.navigate('StoreScreen');
-  }
-  const store = props.data;
+    props.navigation.navigate("StoreScreen", {
+      shopData: store,
+    });
+  };
+
   return (
-    <TouchableWithoutFeedback style={styles.container} >
+    <TouchableWithoutFeedback>
       <ImageBackground
-        source={store.image}
+        source={{uri:store.image}}
         resizeMode="cover"
         style={styles.container}
         imageStyle={{ borderRadius: 20 }}
@@ -49,11 +52,32 @@ const Store = (props) => {
               <Image source={require("../../assets/Images/mapIcon.png")} />
             </View>
           </View>
-          <View style = {{alignItems : 'center', justifyContent : 'space-between', flexDirection : 'row', marginTop : 30}}>
-          <UButton title = "Shop" style = {{width : width/3,backgroundColor: Color.GoldContainerColor,}} onPress = {navigateStoreScreenHandler} />
-          <Text style = {{fontSize : FontSize.navheaderSize, color : Color.primaryText, marginRight : 10}}>{store.rating} <Ionicons name = 'star' size = {30} color = 'white'/></Text>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              marginTop: 30,
+            }}
+          >
+            <UButton
+              title="Shop"
+              style={{
+                width: width / 3,
+                backgroundColor: Color.GoldContainerColor,
+              }}
+              onPress={navigateStoreScreenHandler}
+            />
+            <Text
+              style={{
+                fontSize: FontSize.navheaderSize,
+                color: Color.primaryText,
+                marginRight: 10,
+              }}
+            >
+              {store.rating} <Ionicons name="star" size={30} color="white" />
+            </Text>
           </View>
-          
         </View>
       </ImageBackground>
     </TouchableWithoutFeedback>

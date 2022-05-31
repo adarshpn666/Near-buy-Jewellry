@@ -1,34 +1,24 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Keyboard } from "react-native";
+import { NativeBaseProvider } from 'native-base';
+// import { LogBox } from 'react-native';
 
-import {createStore, combineReducers} from 'redux';
+// LogBox.ignoreLogs(['Setting a timer']);
+
+import store from "./store/store";
 import {Provider} from 'react-redux';
 
-import Navigation from "./navigation/Navigation";
-import favoriteReducer from "./store/reducers/favorites";
-import customReducer from "./store/reducers/customize";
-import loggedUserReducer from "./store/reducers/auth";
-
-
-const rootReducer = combineReducers({
-  favorite: favoriteReducer,
-  custom : customReducer,
-  logged : loggedUserReducer
-});
-
-const store = createStore(rootReducer);
-
-
-
-
+import AppNavigation from "./navigation/AppNavigation";
 
 export default function App() {
   return (
+    <NativeBaseProvider>
     <Provider store = {store}>
     <View style = {styles.container}>
-      <Navigation/>
+      <AppNavigation/>
     </View>
     </Provider>
+    </NativeBaseProvider>
   );
 }
 

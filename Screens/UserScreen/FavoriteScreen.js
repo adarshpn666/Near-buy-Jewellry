@@ -16,10 +16,11 @@ const FavoriteScreen = (props) => {
     </View>
   ) : (
     <View style={styles.container}>
-      <ItemViewContainer
+      {/* <ItemViewContainer
         data={currentFavorites}
         navigation={props.navigation}
-      />
+      /> */}
+      {currentFavorites.map((item) => <Text>item</Text>)}
     </View>
   );
 };

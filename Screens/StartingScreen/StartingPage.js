@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   StyleSheet,
   Image,
@@ -6,13 +6,14 @@ import {
   View,
   FlatList,
   Dimensions,
-  StatusBar,
-  TouchableOpacity,
 } from "react-native";
 
 import Heading from "../../Components/StartingComponents/Heading";
 import Button1 from "../../Components/StartingComponents/Button1";
 import UserLinearGradient from "../../Components/UserLinearGradient";
+
+import { useDispatch, useSelector } from "react-redux";
+import { firstTimeApp } from "../../store/actions/auth";
 
 const { width, height } = Dimensions.get("window");
 
@@ -46,6 +47,12 @@ const slides = [
 const StartingPage = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const ref = useRef(null);
+
+  const dispatch = useDispatch();
+
+  const setFirstTimeApp = useCallback( () =>{
+    dispatch(firstTimeApp());
+},[dispatch]);
 
   const Footer = () => {
     return (
@@ -100,7 +107,7 @@ const StartingPage = ({navigation}) => {
         setCurrentIndex(nextIndex);
       }
     }else{
-        navigation.replace('Login');
+      setFirstTimeApp();
     }
   };
 

@@ -4,16 +4,14 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  TouchableOpacity,
   Keyboard,
   Alert,
 } from "react-native";
-import {  signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../../firebase/firebase-config'
+
 
 import { useDispatch, useSelector } from "react-redux";
-import { loggedUser } from "../../store/actions/auth";
+
+import { signInUser } from "../../store/actions/auth";
 
 
 
@@ -24,12 +22,20 @@ import UserLinearGradient from "../../Components/UserLinearGradient";
 import Input from "../../Components/Input";
 import Button1 from "../../Components/StartingComponents/Button1"; 
 
+import CustomAlert from "../../Components/AuthComponents/CustomAlert";
+
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  const userCredential = {email: email, password : password};
+  
   const dispatch = useDispatch();
+
+  
 
   const userInputHandler = (value) => {
     setEmail(value);
@@ -43,26 +49,13 @@ const Login = (props) => {
     setPassword('');
     setEmail('');
   }
+  
+  const loginHandler = useCallback( () =>{
+      dispatch(signInUser(userCredential,props, setIsError,setErrorMessage));
+      resetInputHandler();
+      Keyboard.dismiss();
+  },[dispatch,userCredential]);
 
-  const loginHandler = () => {
-  signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const curruser = userCredential.user;
-    console.log(curruser);
-    setUser(curruser.displayName);
-    props.navigation.navigate('HomeScreen',{screen : 'Home', params : {name : 'Adars'}})
-   
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
-  });
- 
-   
-  }
 
   return (
     <TouchableWithoutFeedback
@@ -97,11 +90,12 @@ const Login = (props) => {
           <Text
             style={{ ...styles.text, color: Color.newUserColor }}
             onPress={() => {
-              navigation.navigate("Signup");
+              props.navigation.navigate("Signup");
             }}
           >
             New user?
           </Text>
+          <CustomAlert title = {errorMessage} setIsError = {setIsError} isError = {isError}/>
         </UserLinearGradient>
       </View>
     </TouchableWithoutFeedback>

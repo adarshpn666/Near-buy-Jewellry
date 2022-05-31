@@ -18,9 +18,9 @@ import FontSize from "../../Constants/FontSize";
 
 const width = Dimensions.get("window").width;
 
-const item = data[0].products[0];
 
 const ProductScreen = (props) => {
+  const item = props.route.params.product;
   const [numberOfItem, setNumberOfItem] = useState(1);
   const [price, setPrice] = useState(item.price);
 
@@ -34,15 +34,14 @@ const ProductScreen = (props) => {
     numberOfItem === 1 ? setNumberOfItem(1) : setNumberOfItem(numberOfItem - 1);
   };
 
-  // useEffect(() => {
-  //   setPrice(numberOfItem*item.price);
-  // },[numberOfItem]);
+  useEffect(() => {
+    setPrice(numberOfItem*item.price);
+  },[numberOfItem]);
 
-  //  const data = props.data;
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Image source={item.Image} style={styles.image} />
+        <Image source={{uri:item.image}} style={styles.image} />
         <View
           style={{ ...styles.infoContainer, ...styles.commonContainerStyle }}
         >
@@ -53,7 +52,7 @@ const ProductScreen = (props) => {
           <Text style={{ ...styles.descriptext }}>
             Availability : {item.availability ? "In Stock" : "Out Of Stock"}
           </Text>
-          <Text style={{ ...styles.headtext }}>Price : {item.price}</Text>
+          <Text style={{ ...styles.headtext }}>Price : {price}</Text>
         </View>
         <View
           style={{ ...styles.addCartContainer, ...styles.commonContainerStyle }}
@@ -112,8 +111,8 @@ const ProductScreen = (props) => {
             Net weight : {item.netWeight}
           </Text>
           <Text style={{ ...styles.headtext }}>
-            Certification Details :{" "}
-            {item.certificationDetails.map((item) => item + ", ")}
+            Certification Details :
+            {item.certificationDetails}
           </Text>
           <Text style={{ ...styles.headtext }}>Gender : {item.gender}</Text>
           <Text style={{ ...styles.headtext }}>Category : {item.category}</Text>

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect} from "react";
+
 import {
   StyleSheet,
   View,
   Text,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert 
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { auth } from "../../firebase/firebase-config";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+
 
 import { Picker } from "@react-native-picker/picker";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../../store/actions/auth";
 
 import FontSize from "../../Constants/FontSize";
 import Color from "../../Constants/Color";
 import UserLinearGradient from "../../Components/UserLinearGradient";
 import Input from "../../Components/Input";
 import Button1 from "../../Components/StartingComponents/Button1";
+
 
 const Signup = (props) => {
   const [selectedGender, setSelectedGender] = useState();
@@ -29,40 +29,31 @@ const Signup = (props) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [age, setAge] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const signupHandler = () => {
-    createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    )
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        updateProfile(user, {
-          displayName: name,
-          phoneNumber: mobileNumber
-        })
-          .then(() => {
-            // Profile updated!
-            console.log(mobileNumber);
-            console.log(user);
-            props.navigation.navigate("Login");
-          })
-          .catch((error) => {
-            // An error occurred
-            // ...
-          });
-        // ...
-      })
-      .catch((error) => {
-        console.log(error.message);
-        // ..
-      });
-  };
+  const user = {
+   name : name,
+   email : email,
+   mobileNumber : mobileNumber,
+   gender : selectedGender,
+   age : age,
+  }
+
+  const dispatch = useDispatch();  
+  const userDetails = useSelector(state => state.auth.user);
+
+  const signupHandler = useCallback(() =>{
+    dispatch(signUpUser(user, password));
+    Keyboard.dismiss();
+  },[dispatch,user]);
+
+
+
+  
 
   const userNameInputHandler = (name) => {
-    setName(name);
+      setName(name);
   };
 
   const userEmailInputHandler = (email) => {
