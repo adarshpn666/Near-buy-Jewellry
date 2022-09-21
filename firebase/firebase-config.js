@@ -15,17 +15,17 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBcfw6fdjkQM0IMB6v280pENdiU92JW5yM",
+  apiKey: "",
 
-  authDomain: "near-by-jewellery.firebaseapp.com",
+  authDomain: "",
 
   projectId: "near-by-jewellery",
 
   storageBucket: "near-by-jewellery.appspot.com",
 
-  messagingSenderId: "916150016218",
+  messagingSenderId: "",
 
-  appId: "1:916150016218:web:70e2c0980ea469a4716de3"
+  appId: ""
 
 };
 
